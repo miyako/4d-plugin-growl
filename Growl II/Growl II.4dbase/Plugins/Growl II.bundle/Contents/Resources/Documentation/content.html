@@ -1,0 +1,181 @@
+<html xmlns:date="http://exslt.org/dates-and-times">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="./CSS/default.css">
+<title>Growl II</title>
+</head>
+<body>
+<h1>Growl II</h1>
+<p>
+<span class="title">Plugin Identifier: </span>20000</p>
+<p>
+<span class="title">Summary</span>
+</p>
+<ex4D:plugin-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl II here -->
+<p>This plugin is a 4D implementation of the <a href="http://growl.info/">Growl</a> 1.3 SDK. It focuses on simply posting notifications, using the new "mist" feature, which allows applications to post Growl notifications even if Growl is not installed on the local computer.</p>
+</ex4D:plugin-description>
+<a name="command:1"></a>
+<h2>1.3 SDK</h2>
+<a name="command:1,3"></a>
+<h3>Growl Get mist enabled</h3>
+<p>
+<code>enabled:=Growl Get mist enabled</code>
+</p>
+<p>
+<code>enabled</code> (LONGINT)<br>
+<ex4D:return-value label="enabled" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for return value (LONGINT) here-->
+<p>1 if enabled, 0 if disabled.</p>
+</ex4D:return-value>
+</p>
+<p>
+<span class="title">Discussion</span>
+</p>
+<ex4D:command-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl Get mist enabled here -->
+<p>Examine whether mist is enabled or not.</p>
+</ex4D:command-description>
+<a name="command:1,5"></a>
+<h3>Growl Get notification method</h3>
+<p>
+<code>success:=Growl Get notification method (method)</code>
+</p>
+<p>
+<code>method (TEXT)</code>
+</p>
+<ex4D:argument argument-id="1" label="method" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $1 (TEXT) here-->
+<p>The name of the call back method.</p>
+</ex4D:argument>
+<p>
+<code>success</code> (LONGINT)<br>
+<ex4D:return-value label="success" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for return value (LONGINT) here-->
+<p>1, on success.</p>
+</ex4D:return-value>
+</p>
+<p>
+<span class="title">Discussion</span>
+</p>
+<ex4D:command-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl Get notification method here -->
+<p>Returns the name of the call back method.</p>
+</ex4D:command-description>
+<a name="command:1,4"></a>
+<h3>Growl POST NOTIFICATION</h3>
+<p>
+<code>Growl POST NOTIFICATION (title; description; notificationName; iconData; priority; isSticky; clickContext; identifier)</code>
+</p>
+<p>
+<code>title (TEXT)</code>
+</p>
+<ex4D:argument argument-id="1" label="title" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $1 (TEXT) here-->
+<p>A title for this notification.</p>
+</ex4D:argument>
+<p>
+<code>description (TEXT)</code>
+</p>
+<ex4D:argument argument-id="2" label="description" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $2 (TEXT) here-->
+<p>A description of the notification, which should provide more detail but should not flood the user with information.</p>
+</ex4D:argument>
+<p>
+<code>notificationName (TEXT)</code>
+</p>
+<ex4D:argument argument-id="3" label="notificationName" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $3 (TEXT) here-->
+<p>A name for this notification.</p>
+</ex4D:argument>
+<p>
+<code>iconData (BLOB)</code>
+</p>
+<ex4D:argument argument-id="4" label="iconData" type="O" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $4 (BLOB) here-->
+<p>The default 4D icon will be used if the BLOB size is 0.</p>
+</ex4D:argument>
+<p>
+<code>priority (LONGINT)</code>
+</p>
+<ex4D:argument argument-id="5" label="priority" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $5 (LONGINT) here-->
+<p>Pass a value between -2 and +2.</p>
+</ex4D:argument>
+<p>
+<code>isSticky (LONGINT)</code>
+</p>
+<ex4D:argument argument-id="6" label="isSticky" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $6 (LONGINT) here-->
+<p>1 to make the notification sticky.</p>
+</ex4D:argument>
+<p>
+<code>clickContext (TEXT)</code>
+</p>
+<ex4D:argument argument-id="7" label="clickContext" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $7 (TEXT) here-->
+<p>Pass an empty string if you do not care about call back. The context will be apparent in the process name of the call back method when fired.</p>
+</ex4D:argument>
+<p>
+<code>identifier (TEXT)</code>
+</p>
+<ex4D:argument argument-id="8" label="identifier" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $8 (TEXT) here-->
+<p>Notification of the same identifier are grouped together.</p>
+</ex4D:argument>
+<p>
+<span class="title">Discussion</span>
+</p>
+<ex4D:command-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl POST NOTIFICATION here -->
+<p>Post a Growl notification.</p>
+</ex4D:command-description>
+<a name="command:1,2"></a>
+<h3>Growl SET MIST ENABLED</h3>
+<p>
+<code>Growl SET MIST ENABLED (enabled)</code>
+</p>
+<p>
+<code>enabled (LONGINT)</code>
+</p>
+<ex4D:argument argument-id="1" label="enabled" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $1 (LONGINT) here-->
+<p>1 to enable, 0 to disable.</p>
+</ex4D:argument>
+<p>
+<span class="title">Discussion</span>
+</p>
+<ex4D:command-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl SET MIST ENABLED here -->
+<p>Enables or disables mist. Notification with this plugin will not work if mist is disabled.</p>
+</ex4D:command-description>
+<a name="command:1,1"></a>
+<h3>Growl Set notification method</h3>
+<p>
+<code>success:=Growl Set notification method (method)</code>
+</p>
+<p>
+<code>method (TEXT)</code>
+</p>
+<ex4D:argument argument-id="1" label="method" type="T" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for $1 (TEXT) here-->
+<p>The method name.</p>
+</ex4D:argument>
+<p>
+<code>success</code> (LONGINT)<br>
+<ex4D:return-value label="success" type="L" xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for return value (LONGINT) here-->
+<p>1, on success.</p>
+</ex4D:return-value>
+</p>
+<p>
+<span class="title">Discussion</span>
+</p>
+<ex4D:command-description xmlns:ex4D="http://www.4d.com/plugin">
+<!-- write documentation for Growl Set notification method here -->
+<p>Define the project method that should be called when a notification is clicked or timed out.</p>
+</ex4D:command-description>
+<p class="footer">
+<span class="title">Documentation Update: </span>2013-10-01T12:12:5109:00</p>
+</body>
+</html>
