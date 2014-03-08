@@ -275,6 +275,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+									<integer>5</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -298,7 +300,7 @@
 							<real>201</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>652 339 788 504 0 0 1440 878 </string>
+						<string>679 374 788 504 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -314,7 +316,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>listener.h</string>
+								<string>PAListener.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -322,20 +324,20 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>listener.h</string>
+										<string>PAListener.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>D1B1221117FAFA78001885A1</string>
+										<string>D13A2B381843462700E722A3</string>
 										<key>history</key>
 										<array>
 											<string>D17E6BD917FAF4270028B063</string>
 											<string>D17E6C0A17FAF6260028B063</string>
 											<string>D17E6C4817FAF9AF0028B063</string>
 											<string>D17E6C4917FAF9AF0028B063</string>
-											<string>D17E6C4A17FAF9AF0028B063</string>
 											<string>D17E6C4B17FAF9AF0028B063</string>
-											<string>D17E6C7017FAF9BC0028B063</string>
+											<string>D13A2B331843462400E722A3</string>
+											<string>D17E6C4A17FAF9AF0028B063</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -347,14 +349,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {580, 260}}</string>
+								<string>{{0, 0}, {580, 251}}</string>
 								<key>RubberWindowFrame</key>
-								<string>652 339 788 504 0 0 1440 878 </string>
+								<string>679 374 788 504 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>260pt</string>
+							<string>251pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -362,19 +364,19 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20506471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>詳細</string>
+								<string>Detail</string>
 							</dict>
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 265}, {580, 198}}</string>
+								<string>{{0, 256}, {580, 207}}</string>
 								<key>RubberWindowFrame</key>
-								<string>652 339 788 504 0 0 1440 878 </string>
+								<string>679 374 788 504 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>198pt</string>
+							<string>207pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -393,9 +395,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>D1B1221217FAFA78001885A1</string>
+				<string>D13A2B351843462400E722A3</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>D1B1221317FAFA78001885A1</string>
+				<string>D13A2B361843462400E722A3</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -534,10 +536,10 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>D17E6BDF17FAF4270028B063</string>
-		<string>/Users/miyako/Desktop/Growl II/Growl II.xcodeproj</string>
+		<string>/Users/miyako/github-miyako/4d-plugin-growl/Growl II/Growl II.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>652 339 788 504 0 0 1440 878 </string>
+	<string>679 374 788 504 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -580,7 +582,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>XCMainBuildResultsModuleGUID</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ビルド結果</string>
+								<string>Build Results</string>
 								<key>XCBuildResultsTrigger_Collapse</key>
 								<integer>1021</integer>
 								<key>XCBuildResultsTrigger_Open</key>
@@ -614,7 +616,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>D17E6BDF17FAF4270028B063</string>
-				<string>D1B1221417FAFA78001885A1</string>
+				<string>D13A2B371843462400E722A3</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
