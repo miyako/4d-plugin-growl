@@ -9,12 +9,18 @@
 |:------:|:-----:|:---------:|:---------:|
 |🆗|🆗|🚫|🚫|
 
+##About
+
+This plugin is based on the [Growl-2.0.1-SDK](http://growl.info).
+
+**Note**: You can replace the Framework inside the plugin with the one inside the ``Legacy`` folder, in which the ``1.2.3`` framework will be used. The old framework does not support the system Notification Center.
+
 Commands
 ---
 
 ```
 Growl Set notification method
-Growl SET MIST_ENABLED
+Growl SET MIST ENABLED
 Growl Get mist enabled
 Growl POST NOTIFICATION
 Growl Get notification method
