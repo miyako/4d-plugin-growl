@@ -19,7 +19,7 @@
 		D13479201D41ED2200F369B6 /* Growl.h in Headers */ = {isa = PBXBuildFile; fileRef = D134791D1D41ED2200F369B6 /* Growl.h */; settings = {ASSET_TAGS = (); }; };
 		D13479211D41ED2200F369B6 /* GrowlApplicationBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = D134791E1D41ED2200F369B6 /* GrowlApplicationBridge.h */; settings = {ASSET_TAGS = (); }; };
 		D13479221D41ED2200F369B6 /* GrowlDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = D134791F1D41ED2200F369B6 /* GrowlDefines.h */; settings = {ASSET_TAGS = (); }; };
-		D13479261D41EDBE00F369B6 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13479251D41EDBE00F369B6 /* Growl.framework */; };
+		D13C95E21D421D1B00F497CC /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13C95E11D421D1B00F497CC /* Growl.framework */; };
 		D14D83BA1A0E5C0F00AEAB07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D14D83B61A0E5C0F00AEAB07 /* InfoPlist.strings */; };
 		D14D83BD1A0E5CC600AEAB07 /* 4D Plugin_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = D14D83BC1A0E5CC600AEAB07 /* 4D Plugin_Prefix.pch */; };
 		D14D83D11A0E5D3100AEAB07 /* C_BLOB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D14D83BF1A0E5D3100AEAB07 /* C_BLOB.cpp */; };
@@ -71,7 +71,7 @@
 		D134791D1D41ED2200F369B6 /* Growl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Growl.h; path = ../Frameworks/Growl.framework/Versions/A/Headers/Growl.h; sourceTree = "<group>"; };
 		D134791E1D41ED2200F369B6 /* GrowlApplicationBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlApplicationBridge.h; path = ../Frameworks/Growl.framework/Versions/A/Headers/GrowlApplicationBridge.h; sourceTree = "<group>"; };
 		D134791F1D41ED2200F369B6 /* GrowlDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlDefines.h; path = ../Frameworks/Growl.framework/Versions/A/Headers/GrowlDefines.h; sourceTree = "<group>"; };
-		D13479251D41EDBE00F369B6 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
+		D13C95E11D421D1B00F497CC /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = ../Frameworks/Growl.framework; sourceTree = "<group>"; };
 		D14D83B71A0E5C0F00AEAB07 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		D14D83BC1A0E5CC600AEAB07 /* 4D Plugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "4D Plugin_Prefix.pch"; path = "../4D Plugin_Prefix.pch"; sourceTree = "<group>"; };
 		D14D83BF1A0E5D3100AEAB07 /* C_BLOB.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = C_BLOB.cpp; path = "../../4D Plugin API/Classes/C_BLOB.cpp"; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13479261D41EDBE00F369B6 /* Growl.framework in Frameworks */,
+				D13C95E21D421D1B00F497CC /* Growl.framework in Frameworks */,
 				8D01CCCE0486CAD60068D4B7 /* Carbon.framework in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 			);
@@ -126,7 +126,7 @@
 		089C166AFE841209C02AAC07 /* Growl */ = {
 			isa = PBXGroup;
 			children = (
-				D13479251D41EDBE00F369B6 /* Growl.framework */,
+				D13C95E11D421D1B00F497CC /* Growl.framework */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* External Frameworks and Libraries */,
