@@ -13,6 +13,14 @@
 
 This plugin is based on the [Growl-2.0.1-SDK](http://growl.info).
 
+If you don't have Growl running, or if you have configured Growl to used the Notification Center, a system notification will be posted instead.
+
+<img width="524" alt="2016-07-22 18 10 34" src="https://cloud.githubusercontent.com/assets/1725068/17052278/b9192fc0-5037-11e6-9ab3-1456d172f771.png">
+
+Unlike the ``DISPLAY NOTIFICATION`` command of 4D, the notification will always be displayed, even if the application was the frontmost. However, you have less control of the icon if you don't use Growl; the icon is decided from the application name.
+
+![default](https://cloud.githubusercontent.com/assets/1725068/17052371/207b0bca-5038-11e6-9d8b-b7f5fabcb2b5.png)
+
 Commands
 ---
 
