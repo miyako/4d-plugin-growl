@@ -1,0 +1,1 @@
+﻿{"name":"Growl","id":20000,"commands":[{"theme":"Growl","syntax":"Growl SET NOTIFICATION METHOD(&T)"},{"theme":"Growl","syntax":"Growl SET MIST ENABLED(&L)"},{"theme":"Growl","syntax":"Growl Get mist enabled:L"},{"theme":"Growl","syntax":"Growl POST NOTIFICATION(&T;&T;&P;&L;&L;&T;&T)"},{"theme":"Growl","syntax":"Growl Get notification method:T"}]}
