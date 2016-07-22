@@ -21,6 +21,10 @@ Unlike the ``DISPLAY NOTIFICATION`` command of 4D, the notification will always 
 
 ![default](https://cloud.githubusercontent.com/assets/1725068/17052371/207b0bca-5038-11e6-9d8b-b7f5fabcb2b5.png)
 
+On the other hand, with Growl you can specify the icon image.
+
+<img width="300" alt="2016-07-22 18 31 00" src="https://cloud.githubusercontent.com/assets/1725068/17052930/8738ac26-503a-11e6-88b5-a3663da01395.png">
+
 Commands
 ---
 
@@ -64,9 +68,9 @@ $type:=$1
 $clickContext:=$2
 
 Case of 
-: ($type=0)  //clicked
+: ($type=Growl Notification Clicked)
 
-: ($type=1)  //cancelled
+: ($type=Growl Notification Timeout)
 
 End case 
 
