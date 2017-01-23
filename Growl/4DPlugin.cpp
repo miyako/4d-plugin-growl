@@ -181,11 +181,11 @@ void listenerLoopFinish()
 		Growl::shouldKillListenerLoop = true;
 		
 		//tell listener to die
-		while(Growl::monitorProcessId)
-		{
-			PA_YieldAbsolute();
+//		while(Growl::monitorProcessId)
+//		{
+//			PA_YieldAbsolute();
 			PA_UnfreezeProcess(Growl::monitorProcessId);
-		}
+//		}
 	
 	}
 }
