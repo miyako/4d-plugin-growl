@@ -3,13 +3,13 @@
 
 4D plugin to display Growl notification.
 
-##Platform
+### Platform
 
 | carbon | cocoa | win32 | win64 |
 |:------:|:-----:|:---------:|:---------:|
-|🆗|🆗|🚫|🚫|
+|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|||
 
-##About
+## About
 
 This plugin is based on the [Growl-2.0.1-SDK](http://growl.info).
 
@@ -25,8 +25,7 @@ On the other hand, with Growl you can specify the icon image.
 
 <img width="300" alt="2016-07-22 18 31 00" src="https://cloud.githubusercontent.com/assets/1725068/17052930/8738ac26-503a-11e6-88b5-a3663da01395.png">
 
-Commands
----
+### Commands
 
 ```
 Growl Set notification method
@@ -36,7 +35,7 @@ Growl POST NOTIFICATION
 Growl Get notification method
 ```
 
-##Example
+### Examples
 
 ```
 Growl SET NOTIFICATION METHOD ("cb")
@@ -54,11 +53,11 @@ $identifier:="callback1"
 Growl POST NOTIFICATION ($title;$description;$icon;$priority;$sticky;$context;$identifier)
 ```
 
-###Description
+### Description
 
 A new local process is launched to execute the callback method. Use the ``context`` string to keep track of which notification was clicked. The ``identifier`` can be used to group related notifications.
 
-###Callback
+### Callback
 
 ```
 C_LONGINT($1;$type)
