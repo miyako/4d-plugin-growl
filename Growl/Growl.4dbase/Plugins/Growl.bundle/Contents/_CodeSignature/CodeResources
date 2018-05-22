@@ -121,15 +121,6 @@
 			<key>requirement</key>
 			<string>identifier "com.growl.growlframework" and anchor apple generic and certificate leaf[subject.CN] = "3rd Party Mac Developer Application: The Growl Project, LLC" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
-		<key>MacOS/Growl.html</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			lZy0ltXn48/x+6wQ7ra4j15q+FM=
-			</data>
-			<key>requirement</key>
-			<string>identifier Growl and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
-		</dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
 			<key>hash</key>
@@ -429,17 +420,6 @@
 			rp5mwPoToTOMBrO5g9ATVRBDkkR1XpJE6MF06FX5mo0=
 			</data>
 		</dict>
-		<key>Windows/Growl.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			3f3hE90+GMuzyHmK9RVQvLK+Zs8=
-			</data>
-			<key>hash2</key>
-			<data>
-			EKLRdLPtg+PsdxOrCPdnhlHZLbWCJYLapu/sbQTYgHg=
-			</data>
-		</dict>
 		<key>Windows64/Growl.4DX</key>
 		<dict>
 			<key>hash</key>
@@ -449,17 +429,6 @@
 			<key>hash2</key>
 			<data>
 			D81BlAXC8IYBjKsGDu0nx8Zm3OxlDG6/r2pFvj/FY7A=
-			</data>
-		</dict>
-		<key>Windows64/Growl.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			3f3hE90+GMuzyHmK9RVQvLK+Zs8=
-			</data>
-			<key>hash2</key>
-			<data>
-			EKLRdLPtg+PsdxOrCPdnhlHZLbWCJYLapu/sbQTYgHg=
 			</data>
 		</dict>
 		<key>manifest.json</key>

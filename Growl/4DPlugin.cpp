@@ -39,11 +39,9 @@ namespace Growl
 	std::vector<CUTF16String> notificationContexts;
 	
 	//callback management
-	C_TEXT callbackMethodName;
-	method_id_t callbackMethodId = 0;
-	process_number_t monitorProcessId = 0;
-	bool shouldCallMethod = false;
-	bool shouldKillListenerLoop = false;
+	C_TEXT LISTENER_METHOD;
+	process_number_t METHOD_PROCESS_ID = 0;
+	bool PROCESS_SHOULD_TERMINATE = false;
 	
 	//dict
 	NSArray *defaultNotifications = [NSArray arrayWithObject:defaultNotificationName];
@@ -64,6 +62,15 @@ namespace Growl
 
 @implementation Listener
 
+- (id)init
+{
+	if(!(self = [super init])) return self;
+	
+	[GrowlApplicationBridge setGrowlDelegate:self];
+
+	return self;
+}
+
 - (NSString *) applicationNameForGrowl
 {
 	return Growl::defaultApplicationName;
@@ -71,7 +78,7 @@ namespace Growl
 
 - (NSDictionary *) registrationDictionaryForGrowl
 {
-		return Growl::regDict;
+	return Growl::regDict;
 }
 
 - (void) growlNotificationWasClicked:(id)clickContext
@@ -86,7 +93,7 @@ namespace Growl
 
 - (void)call:(notification_type_t)type event:(NSString *)context
 {
-	if(Growl::shouldCallMethod)
+	if(Growl::LISTENER_METHOD.getUTF16Length())
 	{
 		Growl::notificationTypes.push_back(type);
 		
@@ -100,7 +107,7 @@ namespace Growl
 		}
 		Growl::notificationContexts.push_back(s);
 		
-		PA_UnfreezeProcess(Growl::monitorProcessId);
+		PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
 	}
 }
 @end
@@ -122,31 +129,32 @@ void generateUuid(C_TEXT &returnValue)
 
 void listenerLoop()
 {
-	Growl::listener = [GrowlApplicationBridge growlDelegate];
-	
 	Growl::listener = [[Listener alloc]init];
-	[GrowlApplicationBridge setGrowlDelegate:Growl::listener];
-
-	Growl::shouldKillListenerLoop = false;
 	
-	while(!Growl::shouldKillListenerLoop)
+	Growl::PROCESS_SHOULD_TERMINATE = false;
+	
+	while(!Growl::PROCESS_SHOULD_TERMINATE)
 	{
 		PA_YieldAbsolute();
 		while(Growl::notificationTypes.size())
 		{
 			PA_YieldAbsolute();
 			
-			C_TEXT processName;
-			generateUuid(processName);
-			PA_NewProcess((void *)listenerLoopExecute,
-										Growl::MONITOR_PROCESS_STACK_SIZE,
-										(PA_Unichar *)processName.getUTF16StringPtr());
+			/*
+			 C_TEXT processName;
+			 generateUuid(processName);
+			 PA_NewProcess((void *)listenerLoopExecute,
+			 Growl::MONITOR_PROCESS_STACK_SIZE,
+			 (PA_Unichar *)processName.getUTF16StringPtr());
+			 */
+
+			listenerLoopExecuteMethod();
 		
-			if(Growl::shouldKillListenerLoop)
+			if(Growl::PROCESS_SHOULD_TERMINATE)
 				break;
 		}
 	
-		if(!Growl::shouldKillListenerLoop)
+		if(!Growl::PROCESS_SHOULD_TERMINATE)
 		{
 			PA_FreezeProcess(PA_GetCurrentProcessNumber());
 		}
@@ -155,42 +163,44 @@ void listenerLoop()
 	[GrowlApplicationBridge setGrowlDelegate:nil];
 	[Growl::listener release];
 	
-	Growl::notificationTypes.clear();
-	Growl::notificationContexts.clear();
-	Growl::callbackMethodName.setUTF16String((PA_Unichar *)"\0\0", 0);
-	Growl::callbackMethodId = 0;
-	Growl::monitorProcessId = 0;
-	Growl::shouldCallMethod = false;
-	
+	Growl::METHOD_PROCESS_ID = 0;
+
 	PA_KillProcess();
 }
 
 void listenerLoopStart()
 {
-	if(!Growl::monitorProcessId)
+	if(!Growl::METHOD_PROCESS_ID)
 	{
-		Growl::monitorProcessId = PA_NewProcess((void *)listenerLoop, Growl::MONITOR_PROCESS_STACK_SIZE, Growl::MONITOR_PROCESS_NAME);
+		Growl::METHOD_PROCESS_ID = PA_NewProcess((void *)listenerLoop, Growl::MONITOR_PROCESS_STACK_SIZE, Growl::MONITOR_PROCESS_NAME);
 	}
 }
 
 void listenerLoopFinish()
 {
-	if(Growl::monitorProcessId)
+	if(Growl::METHOD_PROCESS_ID)
 	{
-		//set flag
-		Growl::shouldKillListenerLoop = true;
+		Growl::PROCESS_SHOULD_TERMINATE = true;
 		
-		//tell listener to die
-//		while(Growl::monitorProcessId)
-//		{
-//			PA_YieldAbsolute();
-			PA_UnfreezeProcess(Growl::monitorProcessId);
-//		}
-	
+		PA_YieldAbsolute();
+		
+		Growl::notificationTypes.clear();
+		Growl::notificationContexts.clear();
+		Growl::LISTENER_METHOD.setUTF16String((PA_Unichar *)"\0\0", 0);
+
+		Growl::LISTENER_METHOD.setUTF16String((PA_Unichar *)"\0\0", 0);
+		
+		PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
 	}
 }
 
 void listenerLoopExecute()
+{
+	Growl::PROCESS_SHOULD_TERMINATE = false;
+	PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
+}
+
+void listenerLoopExecuteMethod()
 {
 	std::vector<notification_type_t>::iterator t = Growl::notificationTypes.begin();
 	std::vector<CUTF16String>::iterator c = Growl::notificationContexts.begin();
@@ -198,7 +208,9 @@ void listenerLoopExecute()
 	notification_type_t type = *t;
 	CUTF16String clickContext = *c;
 	
-	if(Growl::callbackMethodId)
+	method_id_t methodId = PA_GetMethodID((PA_Unichar *)Growl::LISTENER_METHOD.getUTF16StringPtr());
+																		
+	if(methodId)
 	{
 		PA_Variable	params[2];
 		params[0] = PA_CreateVariable(eVK_Longint);
@@ -208,36 +220,36 @@ void listenerLoopExecute()
 		PA_Unistring context = PA_CreateUnistring((PA_Unichar *)clickContext.c_str());
 		PA_SetStringVariable(&params[1], &context);
 		
-		//the method could be paused or traced
 		Growl::notificationTypes.erase(t);
 		Growl::notificationContexts.erase(c);
 		
-		PA_ExecuteMethodByID(Growl::callbackMethodId, params, 2);
+		PA_ExecuteMethodByID(methodId, params, 2);
 		
 		PA_ClearVariable(&params[0]);
 		PA_ClearVariable(&params[1]);
 	}else{
-		//the method could have been removed
+
+		PA_Variable	params[3];
+		params[1] = PA_CreateVariable(eVK_Longint);
+		params[2] = PA_CreateVariable(eVK_Unistring);
+		
+		PA_SetLongintVariable(&params[1], type);
+		PA_Unistring context = PA_CreateUnistring((PA_Unichar *)clickContext.c_str());
+		PA_SetStringVariable(&params[2], &context);
+		
+		params[0] = PA_CreateVariable(eVK_Unistring);
+		PA_Unistring method = PA_CreateUnistring((PA_Unichar *)Growl::LISTENER_METHOD.getUTF16StringPtr());
+		PA_SetStringVariable(&params[0], &method);
+		
+		/* execute method */
+		PA_ExecuteCommandByID(1007, params, 3);
+		
 		Growl::notificationTypes.erase(t);
 		Growl::notificationContexts.erase(c);
-	}
-}
-
-#pragma mark -
-
-void StartNotification()
-{
-	if(!Growl::shouldKillListenerLoop)
-	{
-		PA_RunInMainProcess((PA_RunInMainProcessProcPtr)listenerLoopStart, NULL);
-	}
-}
-
-void StopNotification()
-{
-	if(!Growl::shouldKillListenerLoop)
-	{
-		PA_RunInMainProcess((PA_RunInMainProcessProcPtr)listenerLoopFinish, NULL);
+		
+		PA_ClearVariable(&params[0]);
+		PA_ClearVariable(&params[1]);
+		PA_ClearVariable(&params[2]);
 	}
 }
 
@@ -262,7 +274,7 @@ void OnCloseProcess()
 {
 	if(IsProcessOnExit())
 	{
-		StopNotification();
+		listenerLoopFinish();
 	}
 }
 
@@ -345,95 +357,78 @@ void Growl_Get_mist_enabled(sLONG_PTR *pResult, PackagePtr pParams)
 
 void Growl_POST_NOTIFICATION(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	C_TEXT Param1;
-	C_TEXT Param2;
-	C_LONGINT Param4;
-	C_LONGINT Param5;
-	C_TEXT Param6;
-	C_TEXT Param7;
-
-	Param1.fromParamAtIndex(pParams, 1);//title
-	Param2.fromParamAtIndex(pParams, 2);//description
-	//icon is managed directly
-	Param4.fromParamAtIndex(pParams, 4);//priority (-2 to +2)
-	Param5.fromParamAtIndex(pParams, 5);//sticky
-	Param6.fromParamAtIndex(pParams, 6);//click-context
-	Param7.fromParamAtIndex(pParams, 7);//identifier
-
-	NSString *title = Param1.copyUTF16String();
-	NSString *description = Param2.copyUTF16String();
-	signed int priority = Param4.getIntValue();
-	priority = (priority < -2) ? -2 :priority; //-2 to +2
-	priority = (priority >  2) ?  2 :priority; //-2 to +2
-	BOOL isSticky = (BOOL)Param5.getIntValue();
-	NSString *clickContext = Param6.copyUTF16String();
-	NSString *identifier = Param7.copyUTF16String();
-	
-	StartNotification();
-	
-	@autoreleasepool
+	if(!IsProcessOnExit())
 	{
-	//icon
-	PA_Picture p = *(PA_Picture *)(pParams[2]);
-	CGImageRef cgImage = (CGImageRef)PA_CreateNativePictureForScreen(p);
-	NSData *iconData = nil;
+		C_TEXT Param1;
+		C_TEXT Param2;
+		C_LONGINT Param4;
+		C_LONGINT Param5;
+		C_TEXT Param6;
+		C_TEXT Param7;
 		
-	if(cgImage)
-	{
-		NSImage *image = [[NSImage alloc]initWithCGImage:cgImage size:NSZeroSize];
-		CFRelease(cgImage);
-		iconData = [image TIFFRepresentation];
-		[image release];
+		Param1.fromParamAtIndex(pParams, 1);//title
+		Param2.fromParamAtIndex(pParams, 2);//description
+		//icon is managed directly
+		Param4.fromParamAtIndex(pParams, 4);//priority (-2 to +2)
+		Param5.fromParamAtIndex(pParams, 5);//sticky
+		Param6.fromParamAtIndex(pParams, 6);//click-context
+		Param7.fromParamAtIndex(pParams, 7);//identifier
+		
+		NSString *title = Param1.copyUTF16String();
+		NSString *description = Param2.copyUTF16String();
+		signed int priority = Param4.getIntValue();
+		priority = (priority < -2) ? -2 :priority; //-2 to +2
+		priority = (priority >  2) ?  2 :priority; //-2 to +2
+		BOOL isSticky = (BOOL)Param5.getIntValue();
+		NSString *clickContext = Param6.copyUTF16String();
+		NSString *identifier = Param7.copyUTF16String();
+		
+		listenerLoopStart();
+		
+		@autoreleasepool
+		{
+			//icon
+			PA_Picture p = *(PA_Picture *)(pParams[2]);
+			CGImageRef cgImage = (CGImageRef)PA_CreateNativePictureForScreen(p);
+			NSData *iconData = nil;
+			
+			if(cgImage)
+			{
+				NSImage *image = [[NSImage alloc]initWithCGImage:cgImage size:NSZeroSize];
+				CFRelease(cgImage);
+				iconData = [image TIFFRepresentation];
+				[image release];
+			}
+			
+			[GrowlApplicationBridge notifyWithTitle:title
+																	description:description
+														 notificationName:Growl::defaultNotificationName
+																		 iconData:iconData
+																		 priority:priority
+																		 isSticky:isSticky
+																 clickContext:clickContext
+																	 identifier:[identifier length] == 0 ? nil : identifier];
+		}
+		
+		//cleanup
+		[title release];
+		[description release];
+		[clickContext release];
+		[identifier release];
+		
 	}
 	
-	[GrowlApplicationBridge notifyWithTitle:title
-															description:description
-												 notificationName:Growl::defaultNotificationName
-																 iconData:iconData
-																 priority:priority
-																 isSticky:isSticky
-														 clickContext:clickContext
-															 identifier:[identifier length] == 0 ? nil : identifier];
-	}
-	
-	//cleanup
-	[title release];
-	[description release];
-	[clickContext release];
-	[identifier release];
 }
 
 #pragma mark -
 
 void Growl_Get_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	Growl::callbackMethodName.setReturn(pResult);
+	Growl::LISTENER_METHOD.setReturn(pResult);
 }
 
 void Growl_Set_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	C_TEXT Param1;
-	
-	Param1.fromParamAtIndex(pParams, 1);
-	
-	if(!Param1.getUTF16Length())
-	{
-		
-		Growl::shouldCallMethod = false;
-		
-	}else{
-		
-		method_id_t methodId = PA_GetMethodID((PA_Unichar *)Param1.getUTF16StringPtr());
-		
-		if(methodId)
-		{
-			if(methodId != Growl::callbackMethodId)
-			{
-				Growl::callbackMethodName.setUTF16String(Param1.getUTF16StringPtr(), Param1.getUTF16Length());
-				Growl::callbackMethodId = methodId;
-			}
-			Growl::shouldCallMethod = true;
-		}
-	}
+	Growl::LISTENER_METHOD.fromParamAtIndex(pParams, 1);
 }
 

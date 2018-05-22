@@ -21,6 +21,7 @@ void listenerLoop(void);
 void listenerLoopStart(void);
 void listenerLoopFinish(void);
 void listenerLoopExecute(void);
+void listenerLoopExecuteMethod(void);
 
 //internal variable
 
@@ -35,8 +36,3 @@ typedef enum
 	NotificationWasClicked = 0,
 	NotificationTimedOut = 1
 } notification_type_t;
-
-//
-
-void StartNotification();
-void StopNotification();
