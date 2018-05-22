@@ -31,15 +31,39 @@ On the other hand, with Growl you can specify the icon image.
 
 **Note**: It seems MIST is no longer available in SDK v2.
 
-## Commands
+## Syntax
 
 ```
-Growl Set notification method
-Growl SET MIST ENABLED
-Growl Get mist enabled
-Growl POST NOTIFICATION
-Growl Get notification method
+Growl POST NOTIFICATION (title;description;icon;priority;sticky;context;identifier)
 ```
+
+Parameter|Type|Description
+------------|------------|----
+title|TEXT|
+description|TEXT|
+icon|PICTURE|
+priority|LONGINT|
+sticky|LONGINT|
+context|TEXT|
+identifier|TEXT|
+
+```
+enabled:=Growl Get mist enabled
+Growl SET MIST ENABLED (enabled)
+```
+
+Parameter|Type|Description
+------------|------------|----
+enabled|LONGINT|``1`` or ``0``
+
+```
+method:=Growl Get notification method
+Growl SET NOTIFICATION METHOD (method)
+```
+
+Parameter|Type|Description
+------------|------------|----
+method|TEXT|
 
 ## Examples
 
