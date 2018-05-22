@@ -23,7 +23,7 @@ If you don't have Growl running, or if you have configured Growl to used the Not
 
 Unlike the ``DISPLAY NOTIFICATION`` command of 4D, the notification will always be displayed, even if the application is running as the frontmost. However, you have less control of the icon if you don't use Growl; the icon is decided by the application name.
 
-<img width="320" alt="2016-07-22 18 31 00" src="https://cloud.githubusercontent.com/assets/1725068/17052371/207b0bca-5038-11e6-9d8b-b7f5fabcb2b5.png">
+<img width="310" alt="2016-07-22 18 31 00" src="https://cloud.githubusercontent.com/assets/1725068/17052371/207b0bca-5038-11e6-9d8b-b7f5fabcb2b5.png">
 
 On the other hand, with Growl you can specify the icon image.
 
