@@ -20,7 +20,7 @@
 							 {
 							 "theme": "Growl",
 							 "syntax": "Growl POST NOTIFICATION(&T;&T;&P;&L;&L;&T;&T)",
-							 "threadSafe": true
+							 "threadSafe": false
 							 },
 							 {
 							 "theme": "Growl",

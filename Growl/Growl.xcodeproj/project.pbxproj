@@ -51,11 +51,11 @@
 		D13116F11A03C2D400DE1322 /* C_BLOB.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116EF1A03C2D400DE1322 /* C_BLOB.h */; };
 		D13116F41A03C7AF00DE1322 /* ARRAY_DATE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D13116F21A03C7AF00DE1322 /* ARRAY_DATE.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		D13116F51A03C7AF00DE1322 /* ARRAY_DATE.h in Headers */ = {isa = PBXBuildFile; fileRef = D13116F31A03C7AF00DE1322 /* ARRAY_DATE.h */; };
-		D13479161D41850E00F369B6 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13479151D41850E00F369B6 /* Growl.framework */; };
-		D134791A1D41855100F369B6 /* Growl.h in Headers */ = {isa = PBXBuildFile; fileRef = D13479171D41855100F369B6 /* Growl.h */; };
-		D134791B1D41855100F369B6 /* GrowlApplicationBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = D13479181D41855100F369B6 /* GrowlApplicationBridge.h */; };
-		D134791C1D41855100F369B6 /* GrowlDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = D13479191D41855100F369B6 /* GrowlDefines.h */; };
 		D134D4AC1A030BA0008D14EF /* manifest.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = D134D4A91A030B06008D14EF /* manifest.json */; };
+		D171763920CE9DD200BB7099 /* Growl.h in Headers */ = {isa = PBXBuildFile; fileRef = D171763620CE9DD200BB7099 /* Growl.h */; };
+		D171763A20CE9DD200BB7099 /* GrowlApplicationBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = D171763720CE9DD200BB7099 /* GrowlApplicationBridge.h */; };
+		D171763B20CE9DD200BB7099 /* GrowlDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = D171763820CE9DD200BB7099 /* GrowlDefines.h */; };
+		D171763D20CE9F4900BB7099 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D171763C20CE9F4900BB7099 /* Growl.framework */; };
 		D175D9CD1A02E8DD0006B569 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,12 +119,12 @@
 		D13116EF1A03C2D400DE1322 /* C_BLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C_BLOB.h; path = Classes/C_BLOB.h; sourceTree = "<group>"; };
 		D13116F21A03C7AF00DE1322 /* ARRAY_DATE.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ARRAY_DATE.cpp; path = Classes/ARRAY_DATE.cpp; sourceTree = "<group>"; };
 		D13116F31A03C7AF00DE1322 /* ARRAY_DATE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARRAY_DATE.h; path = Classes/ARRAY_DATE.h; sourceTree = "<group>"; };
-		D13479151D41850E00F369B6 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/Growl.framework; sourceTree = "<group>"; };
-		D13479171D41855100F369B6 /* Growl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Growl.h; path = Frameworks/Growl.framework/Versions/A/Headers/Growl.h; sourceTree = "<group>"; };
-		D13479181D41855100F369B6 /* GrowlApplicationBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlApplicationBridge.h; path = Frameworks/Growl.framework/Versions/A/Headers/GrowlApplicationBridge.h; sourceTree = "<group>"; };
-		D13479191D41855100F369B6 /* GrowlDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlDefines.h; path = Frameworks/Growl.framework/Versions/A/Headers/GrowlDefines.h; sourceTree = "<group>"; };
 		D134D4A91A030B06008D14EF /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		D14D10DD1A03A8A5008B3411 /* constants.xlf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = constants.xlf; sourceTree = "<group>"; };
+		D171763620CE9DD200BB7099 /* Growl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Growl.h; path = Frameworks/2.1.3/Growl.framework/Headers/Growl.h; sourceTree = "<group>"; };
+		D171763720CE9DD200BB7099 /* GrowlApplicationBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlApplicationBridge.h; path = Frameworks/2.1.3/Growl.framework/Headers/GrowlApplicationBridge.h; sourceTree = "<group>"; };
+		D171763820CE9DD200BB7099 /* GrowlDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrowlDefines.h; path = Frameworks/2.1.3/Growl.framework/Headers/GrowlDefines.h; sourceTree = "<group>"; };
+		D171763C20CE9F4900BB7099 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = Frameworks/2.1.3/Growl.framework; sourceTree = "<group>"; };
 		D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -133,9 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13479161D41850E00F369B6 /* Growl.framework in Frameworks */,
 				D13116C71A03B5B600DE1322 /* AppKit.framework in Frameworks */,
 				D175D9CD1A02E8DD0006B569 /* CoreGraphics.framework in Frameworks */,
+				D171763D20CE9F4900BB7099 /* Growl.framework in Frameworks */,
 				D130064F12F02D9700702C0E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,9 +146,9 @@
 		089C166AFE841209C02AAC07 /* Growl */ = {
 			isa = PBXGroup;
 			children = (
-				D13479171D41855100F369B6 /* Growl.h */,
-				D13479181D41855100F369B6 /* GrowlApplicationBridge.h */,
-				D13479191D41855100F369B6 /* GrowlDefines.h */,
+				D171763620CE9DD200BB7099 /* Growl.h */,
+				D171763720CE9DD200BB7099 /* GrowlApplicationBridge.h */,
+				D171763820CE9DD200BB7099 /* GrowlDefines.h */,
 				D108BD7A1A03D1E6001F1B90 /* Manifest */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -161,7 +161,7 @@
 		089C1671FE841209C02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D13479151D41850E00F369B6 /* Growl.framework */,
+				D171763C20CE9F4900BB7099 /* Growl.framework */,
 				D13116C61A03B5B600DE1322 /* AppKit.framework */,
 				D175D9CC1A02E8DD0006B569 /* CoreGraphics.framework */,
 				D130064E12F02D9700702C0E /* Cocoa.framework */,
@@ -282,7 +282,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D134791A1D41855100F369B6 /* Growl.h in Headers */,
+				D171763920CE9DD200BB7099 /* Growl.h in Headers */,
 				8D01CCC80486CAD60068D4B7 /* 4D Plugin_Prefix.pch in Headers */,
 				D13116F11A03C2D400DE1322 /* C_BLOB.h in Headers */,
 				D13116D91A03BBFC00DE1322 /* ARRAY_TEXT.h in Headers */,
@@ -291,7 +291,7 @@
 				D13116BD1A03B3C300DE1322 /* C_TIME.h in Headers */,
 				18B684F806944F2000CC6A1E /* EntryPoints.h in Headers */,
 				18B684F906944F2000CC6A1E /* Flags.h in Headers */,
-				D134791C1D41855100F369B6 /* GrowlDefines.h in Headers */,
+				D171763B20CE9DD200BB7099 /* GrowlDefines.h in Headers */,
 				D13116E31A03BC1100DE1322 /* ARRAY_BOOLEAN.h in Headers */,
 				D13116B11A03B33D00DE1322 /* C_INTEGER.h in Headers */,
 				18B684FA06944F2000CC6A1E /* PrivateTypes.h in Headers */,
@@ -303,7 +303,7 @@
 				D13116E71A03BC1100DE1322 /* ARRAY_LONGINT.h in Headers */,
 				D13116C51A03B48900DE1322 /* C_TEXT.h in Headers */,
 				D13116AD1A03B10800DE1322 /* C_LONGINT.h in Headers */,
-				D134791B1D41855100F369B6 /* GrowlApplicationBridge.h in Headers */,
+				D171763A20CE9DD200BB7099 /* GrowlApplicationBridge.h in Headers */,
 				D120937F13534DCC00A72CAA /* 4DPlugin.h in Headers */,
 				D13116E51A03BC1100DE1322 /* ARRAY_INTEGER.h in Headers */,
 				D13116F51A03C7AF00DE1322 /* ARRAY_DATE.h in Headers */,
@@ -440,7 +440,10 @@
 				DEBUGGING_SYMBOLS = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/2.1.3",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
@@ -483,7 +486,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_LOCATION = NO;
 				DEVELOPMENT_TEAM = Y69CWUC25B;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/2.1.3",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -526,6 +532,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Growl.4dbase/Plugins/Growl.bundle/Contents/Frameworks",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/2.1.3",
 				);
 				GCC_ENABLE_TRIGRAPHS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
