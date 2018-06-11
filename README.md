@@ -11,7 +11,7 @@
 
 ### Releases
 
-[2.0](https://github.com/miyako/4d-plugin-growl/releases/tag/2.0)
+[2.0.1](https://github.com/miyako/4d-plugin-growl/releases/tag/2.0.1)
 
 ## About
 
@@ -28,8 +28,6 @@ Unlike the ``DISPLAY NOTIFICATION`` command of 4D, the notification will always 
 On the other hand, with Growl you can specify the icon image.
 
 <img width="300" alt="2016-07-22 18 31 00" src="https://cloud.githubusercontent.com/assets/1725068/17052930/8738ac26-503a-11e6-88b5-a3663da01395.png">
-
-**Note**: It seems MIST is no longer available in SDK v2.
 
 ## Syntax
 
