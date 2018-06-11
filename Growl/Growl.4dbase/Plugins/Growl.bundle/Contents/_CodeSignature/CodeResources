@@ -100,7 +100,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tnQGPiJNJ1HeiiBcBMjISUzn02s=
+			O/TzDqvFmavA3hWeDuPhPjO4x64=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -116,10 +116,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			OaLs4msE/wkHIyiQpZfcI36qNWA=
+			NE1R7jYT4auxTNw1f1ypUgh8+Q0=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.growl.growlframework" and anchor apple generic and certificate leaf[subject.CN] = "3rd Party Mac Developer Application: The Growl Project, LLC" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>identifier "com.growl.growlframework" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
 		</dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
@@ -389,11 +389,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tnQGPiJNJ1HeiiBcBMjISUzn02s=
+			O/TzDqvFmavA3hWeDuPhPjO4x64=
 			</data>
 			<key>hash2</key>
 			<data>
-			6h7qoDOfbMwsd/6l4cD2cHjswhrQtKv15ewwZWiIXv0=
+			ukBmeoMfuVOWhq9w2sd7QXUcUDgv/0dbxWdbl4fsP3k=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -435,7 +435,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			e7Rciijifu2UmLmmy8TC+0UqsGY=
+			ZYxhN6LF4oOrzIMkIhbLb53eaq4=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
