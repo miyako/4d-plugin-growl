@@ -13,6 +13,8 @@
 
 [2.0.1](https://github.com/miyako/4d-plugin-growl/releases/tag/2.0.1)
 
+[1.3](https://github.com/miyako/4d-plugin-growl/releases/tag/1.3) with mist (unstable)
+
 ## About
 
 This plugin is based on the [Growl-2.0.1-SDK](http://growl.info).
