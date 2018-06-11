@@ -9,6 +9,7 @@
  # --------------------------------------------------------------------------------*/
 
 #import <Growl/Growl.h>
+#include <mutex>
 
 // --- Growl
 void Growl_Set_notification_method(sLONG_PTR *pResult, PackagePtr pParams);

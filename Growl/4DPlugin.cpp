@@ -11,6 +11,9 @@
 #include "4DPluginAPI.h"
 #include "4DPlugin.h"
 
+#define CALLBACK_IN_NEW_PROCESS 0
+#define CALLBACK_SLEEP_TIME 59
+
 @interface Listener : NSObject <GrowlApplicationBridgeDelegate>
 {
 
@@ -58,6 +61,8 @@ namespace Growl
 		GROWL_NOTIFICATIONS_ALL,
 		GROWL_NOTIFICATIONS_DEFAULT,
 		nil]];
+	
+	bool PROCESS_SHOULD_RESUME = false;
 };
 
 @implementation Listener
@@ -69,6 +74,13 @@ namespace Growl
 	[GrowlApplicationBridge setGrowlDelegate:self];
 
 	return self;
+}
+
+- (void)dealloc
+{
+	[[NSUserNotificationCenter defaultUserNotificationCenter]removeAllDeliveredNotifications];
+
+	[super dealloc];
 }
 
 - (NSString *) applicationNameForGrowl
@@ -93,6 +105,9 @@ namespace Growl
 
 - (void)call:(notification_type_t)type event:(NSString *)context
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	if(Growl::LISTENER_METHOD.getUTF16Length())
 	{
 		Growl::notificationTypes.push_back(type);
@@ -107,7 +122,7 @@ namespace Growl
 		}
 		Growl::notificationContexts.push_back(s);
 		
-		PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
+		Growl::PROCESS_SHOULD_RESUME = true;
 	}
 }
 @end
@@ -129,47 +144,79 @@ void generateUuid(C_TEXT &returnValue)
 
 void listenerLoop()
 {
-	Growl::listener = [[Listener alloc]init];
-	
-	Growl::PROCESS_SHOULD_TERMINATE = false;
-	
-	while(!Growl::PROCESS_SHOULD_TERMINATE)
+	if(1)
+	{
+		std::mutex mm;
+		std::lock_guard<std::mutex> lock(mm);
+		
+		Growl::listener = [[Listener alloc]init];
+		
+		Growl::PROCESS_SHOULD_TERMINATE = false;
+	}
+
+	while(!PA_IsProcessDying())
 	{
 		PA_YieldAbsolute();
-		while(Growl::notificationTypes.size())
-		{
-			PA_YieldAbsolute();
-			
-			/*
-			 C_TEXT processName;
-			 generateUuid(processName);
-			 PA_NewProcess((void *)listenerLoopExecute,
-			 Growl::MONITOR_PROCESS_STACK_SIZE,
-			 (PA_Unichar *)processName.getUTF16StringPtr());
-			 */
 
-			listenerLoopExecuteMethod();
+		std::mutex m;
+		std::lock_guard<std::mutex> lock(m);
 		
-			if(Growl::PROCESS_SHOULD_TERMINATE)
-				break;
+		if(Growl::PROCESS_SHOULD_RESUME)
+		{
+			while(Growl::notificationTypes.size())
+			{
+				PA_YieldAbsolute();
+				
+				if(CALLBACK_IN_NEW_PROCESS)
+				{
+				 C_TEXT processName;
+				 generateUuid(processName);
+				 PA_NewProcess((void *)listenerLoopExecute,
+											 Growl::MONITOR_PROCESS_STACK_SIZE,
+											 (PA_Unichar *)processName.getUTF16StringPtr());
+				}else
+				{
+					listenerLoopExecuteMethod();
+				}
+				
+				if(Growl::PROCESS_SHOULD_TERMINATE)
+					break;
+			}
+			
+			Growl::PROCESS_SHOULD_RESUME = false;
+			
+		}else
+		{
+			PA_PutProcessToSleep(PA_GetCurrentProcessNumber(), CALLBACK_SLEEP_TIME);
 		}
 	
-		if(!Growl::PROCESS_SHOULD_TERMINATE)
-		{
-			PA_FreezeProcess(PA_GetCurrentProcessNumber());
-		}
+		if(Growl::PROCESS_SHOULD_TERMINATE)
+			break;
 	}
 	
-	[GrowlApplicationBridge setGrowlDelegate:nil];
-	[Growl::listener release];
+	/* need to detach delegate in order to release it */
+	[[NSUserNotificationCenter defaultUserNotificationCenter]setDelegate:nil];
 	
-	Growl::METHOD_PROCESS_ID = 0;
+	[GrowlApplicationBridge setGrowlDelegate:nil];
+	
+	if(1)
+	{
+		std::mutex m;
+		std::lock_guard<std::mutex> lock(m);
+
+		[Growl::listener release];
+		
+		Growl::METHOD_PROCESS_ID = 0;
+	}
 
 	PA_KillProcess();
 }
 
 void listenerLoopStart()
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	if(!Growl::METHOD_PROCESS_ID)
 	{
 		Growl::METHOD_PROCESS_ID = PA_NewProcess((void *)listenerLoop, Growl::MONITOR_PROCESS_STACK_SIZE, Growl::MONITOR_PROCESS_NAME);
@@ -178,6 +225,9 @@ void listenerLoopStart()
 
 void listenerLoopFinish()
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	if(Growl::METHOD_PROCESS_ID)
 	{
 		Growl::PROCESS_SHOULD_TERMINATE = true;
@@ -188,20 +238,24 @@ void listenerLoopFinish()
 		Growl::notificationContexts.clear();
 		Growl::LISTENER_METHOD.setUTF16String((PA_Unichar *)"\0\0", 0);
 
-		Growl::LISTENER_METHOD.setUTF16String((PA_Unichar *)"\0\0", 0);
-		
-		PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
+		Growl::PROCESS_SHOULD_RESUME = true;
 	}
 }
 
 void listenerLoopExecute()
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	Growl::PROCESS_SHOULD_TERMINATE = false;
-	PA_UnfreezeProcess(Growl::METHOD_PROCESS_ID);
+	Growl::PROCESS_SHOULD_RESUME = true;
 }
 
 void listenerLoopExecuteMethod()
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	std::vector<notification_type_t>::iterator t = Growl::notificationTypes.begin();
 	std::vector<CUTF16String>::iterator c = Growl::notificationContexts.begin();
 	
@@ -339,6 +393,9 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 
 void Growl_SET_MIST_ENABLED(sLONG_PTR *pResult, PackagePtr pParams)
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	C_LONGINT Param1;
 	
 	Param1.fromParamAtIndex(pParams, 1);
@@ -348,6 +405,9 @@ void Growl_SET_MIST_ENABLED(sLONG_PTR *pResult, PackagePtr pParams)
 
 void Growl_Get_mist_enabled(sLONG_PTR *pResult, PackagePtr pParams)
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	C_LONGINT returnValue;
 	
 	returnValue.setIntValue([GrowlApplicationBridge shouldUseBuiltInNotifications]);
@@ -424,11 +484,17 @@ void Growl_POST_NOTIFICATION(sLONG_PTR *pResult, PackagePtr pParams)
 
 void Growl_Get_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	Growl::LISTENER_METHOD.setReturn(pResult);
 }
 
 void Growl_Set_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	Growl::LISTENER_METHOD.fromParamAtIndex(pParams, 1);
 }
 
