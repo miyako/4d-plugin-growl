@@ -17,6 +17,12 @@
 
 [2.0.1](https://github.com/miyako/4d-plugin-growl/releases/tag/2.0.1)
 
+![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
+
+except 
+
+* ``Growl POST NOTIFICATION``
+
 [1.3](https://github.com/miyako/4d-plugin-growl/releases/tag/1.3) with mist (unstable)
 
 ## About
