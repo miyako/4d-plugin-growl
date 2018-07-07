@@ -15,6 +15,8 @@
 #define CALLBACK_SLEEP_TIME 59
 
 std::mutex globalMutex;
+std::mutex globalMutex0;
+std::mutex globalMutex2;
 
 @interface Listener : NSObject <GrowlApplicationBridgeDelegate>
 {
@@ -158,7 +160,7 @@ void listenerLoop()
 	{
 		PA_YieldAbsolute();
 
-		/* no mutex here; see listenerLoopExecuteMethod */
+		std::lock_guard<std::mutex> lock(globalMutex2);
 		
 		if(Growl::PROCESS_SHOULD_RESUME)
 		{
@@ -214,7 +216,8 @@ void listenerLoop()
 
 void listenerLoopStart()
 {
-	/* no mutext here; see listenerLoop */
+	std::lock_guard<std::mutex> lock(globalMutex0);
+	
 	if(!Growl::METHOD_PROCESS_ID)
 	{
 		Growl::METHOD_PROCESS_ID = PA_NewProcess((void *)listenerLoop,
