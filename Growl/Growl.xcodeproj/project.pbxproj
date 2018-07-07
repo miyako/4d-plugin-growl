@@ -146,9 +146,7 @@
 		089C166AFE841209C02AAC07 /* Growl */ = {
 			isa = PBXGroup;
 			children = (
-				D171763620CE9DD200BB7099 /* Growl.h */,
-				D171763720CE9DD200BB7099 /* GrowlApplicationBridge.h */,
-				D171763820CE9DD200BB7099 /* GrowlDefines.h */,
+				D1CEFA3620F0F0AF00DA0199 /* Growl */,
 				D108BD7A1A03D1E6001F1B90 /* Manifest */,
 				08FB77ADFE841716C02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -273,6 +271,16 @@
 				D13116D01A03BBA100DE1322 /* C */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		D1CEFA3620F0F0AF00DA0199 /* Growl */ = {
+			isa = PBXGroup;
+			children = (
+				D171763620CE9DD200BB7099 /* Growl.h */,
+				D171763720CE9DD200BB7099 /* GrowlApplicationBridge.h */,
+				D171763820CE9DD200BB7099 /* GrowlDefines.h */,
+			);
+			name = Growl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

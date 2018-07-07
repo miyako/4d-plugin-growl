@@ -14,6 +14,8 @@
 #define CALLBACK_IN_NEW_PROCESS 0
 #define CALLBACK_SLEEP_TIME 59
 
+std::mutex globalMutex;
+
 @interface Listener : NSObject <GrowlApplicationBridgeDelegate>
 {
 
@@ -105,8 +107,7 @@ namespace Growl
 
 - (void)call:(notification_type_t)type event:(NSString *)context
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	if(Growl::LISTENER_METHOD.getUTF16Length())
 	{
@@ -146,8 +147,7 @@ void listenerLoop()
 {
 	if(1)
 	{
-		std::mutex m;
-		std::lock_guard<std::mutex> lock(m);
+		std::lock_guard<std::mutex> lock(globalMutex);
 		
 		Growl::listener = [[Listener alloc]init];
 		
@@ -158,8 +158,7 @@ void listenerLoop()
 	{
 		PA_YieldAbsolute();
 
-		std::mutex m;
-		std::lock_guard<std::mutex> lock(m);
+		/* no mutex here; see listenerLoopExecuteMethod */
 		
 		if(Growl::PROCESS_SHOULD_RESUME)
 		{
@@ -199,8 +198,7 @@ void listenerLoop()
 	
 	if(1)
 	{
-		std::mutex m;
-		std::lock_guard<std::mutex> lock(m);
+		std::lock_guard<std::mutex> lock(globalMutex);
 
 		Growl::notificationTypes.clear();
 		Growl::notificationContexts.clear();
@@ -216,9 +214,7 @@ void listenerLoop()
 
 void listenerLoopStart()
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
-	
+	/* no mutext here; see listenerLoop */
 	if(!Growl::METHOD_PROCESS_ID)
 	{
 		Growl::METHOD_PROCESS_ID = PA_NewProcess((void *)listenerLoop,
@@ -229,8 +225,7 @@ void listenerLoopStart()
 
 void listenerLoopFinish()
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	if(Growl::METHOD_PROCESS_ID)
 	{
@@ -244,8 +239,7 @@ void listenerLoopFinish()
 
 void listenerLoopExecute()
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	Growl::PROCESS_SHOULD_TERMINATE = false;
 	Growl::PROCESS_SHOULD_RESUME = true;
@@ -253,8 +247,7 @@ void listenerLoopExecute()
 
 void listenerLoopExecuteMethod()
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	std::vector<notification_type_t>::iterator t = Growl::notificationTypes.begin();
 	std::vector<CUTF16String>::iterator c = Growl::notificationContexts.begin();
@@ -460,24 +453,21 @@ void Growl_POST_NOTIFICATION(sLONG_PTR *pResult, PackagePtr pParams)
 
 void Growl_Get_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	Growl::LISTENER_METHOD.setReturn(pResult);
 }
 
 void Growl_Set_notification_method(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	Growl::LISTENER_METHOD.fromParamAtIndex(pParams, 1);
 }
 
 void Growl_SET_MIST_ENABLED(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	C_LONGINT Param1;
 	
@@ -488,8 +478,7 @@ void Growl_SET_MIST_ENABLED(sLONG_PTR *pResult, PackagePtr pParams)
 
 void Growl_Get_mist_enabled(sLONG_PTR *pResult, PackagePtr pParams)
 {
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	C_LONGINT returnValue;
 	
