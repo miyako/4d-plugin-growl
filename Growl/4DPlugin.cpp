@@ -16,7 +16,6 @@
 
 std::mutex globalMutex;
 std::mutex globalMutex0;
-std::mutex globalMutex2;
 
 @interface Listener : NSObject <GrowlApplicationBridgeDelegate>
 {
@@ -159,12 +158,28 @@ void listenerLoop()
 	while(!PA_IsProcessDying())
 	{
 		PA_YieldAbsolute();
+        
+        bool PROCESS_SHOULD_RESUME;
+        bool PROCESS_SHOULD_TERMINATE;
 
-		std::lock_guard<std::mutex> lock(globalMutex2);
-		
-		if(Growl::PROCESS_SHOULD_RESUME)
+        if(1)
+        {
+            std::lock_guard<std::mutex> lock(globalMutex);
+            PROCESS_SHOULD_RESUME = Growl::PROCESS_SHOULD_RESUME;
+            PROCESS_SHOULD_TERMINATE = Growl::PROCESS_SHOULD_TERMINATE;
+        }
+        
+		if(PROCESS_SHOULD_RESUME)
 		{
-			while(Growl::notificationTypes.size())
+            size_t TYPES;
+            
+            if(1)
+            {
+                std::lock_guard<std::mutex> lock(globalMutex);
+                TYPES = Growl::notificationTypes.size();
+            }
+            
+			while(TYPES)
 			{
 				PA_YieldAbsolute();
 				
@@ -180,18 +195,28 @@ void listenerLoop()
 					listenerLoopExecuteMethod();
 				}
 				
-				if(Growl::PROCESS_SHOULD_TERMINATE)
+				if(PROCESS_SHOULD_TERMINATE)
 					break;
 			}
 			
-			Growl::PROCESS_SHOULD_RESUME = false;
-			
+            if(1)
+            {
+                std::lock_guard<std::mutex> lock(globalMutex);
+                Growl::PROCESS_SHOULD_RESUME = false;
+            }
+
 		}else
 		{
 			PA_PutProcessToSleep(PA_GetCurrentProcessNumber(), CALLBACK_SLEEP_TIME);
 		}
 	
-		if(Growl::PROCESS_SHOULD_TERMINATE)
+        if(1)
+        {
+            std::lock_guard<std::mutex> lock(globalMutex);
+            PROCESS_SHOULD_TERMINATE = Growl::PROCESS_SHOULD_TERMINATE;
+        }
+        
+		if(PROCESS_SHOULD_TERMINATE)
 			break;
 	}
 	
