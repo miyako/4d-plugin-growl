@@ -197,6 +197,13 @@ void listenerLoop()
 				
 				if(PROCESS_SHOULD_TERMINATE)
 					break;
+                
+                if(1)
+                {
+                    std::lock_guard<std::mutex> lock(globalMutex);
+                    TYPES = Growl::notificationTypes.size();
+                    PROCESS_SHOULD_TERMINATE = Growl::PROCESS_SHOULD_TERMINATE;
+                }
 			}
 			
             if(1)
