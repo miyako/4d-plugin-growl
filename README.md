@@ -15,7 +15,7 @@
 
 ### Releases
 
-[2.0.5](https://github.com/miyako/4d-plugin-growl/releases/tag/2.0.5)
+[2.1](https://github.com/miyako/4d-plugin-growl/releases/tag/2.1)
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
