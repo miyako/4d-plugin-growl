@@ -13,6 +13,8 @@
 
 <img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" /> <img src="https://user-images.githubusercontent.com/1725068/41266195-ddf767b2-6e30-11e8-9d6b-2adf6a9f57a5.png" width="32" height="32" />
 
+**no notarized** [tickets](https://osxapps-ssl.itunes.apple.com/itunes-assets/Enigma123/v4/8a/60/c5/8a60c5db-edfa-a6b3-d118-31da6cd34880/developer_log.json?accessKey=1571735361_1381484697430042396_kRvZvyM0Bab5%2F5fOvwpj%2FJ53q8Ohu31nhoPsxVlnwVm8aH2d2Pn%2Bx%2BIadRv%2BJjR8PBhUT%2F56myRobJpRZN8CBYNpCE26EVA7ukvmTy2xCITmfvgSgYBRPpikyq7sF4%2F8tRyrFQJsrxeIM7gU2CZKjmWFeMb9mCdd%2Bv9KacoroXg%3D)
+
 ### Releases
 
 [2.1](https://github.com/miyako/4d-plugin-growl/releases/tag/2.1)
